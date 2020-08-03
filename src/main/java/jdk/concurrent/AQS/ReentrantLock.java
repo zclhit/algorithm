@@ -2,6 +2,7 @@ package jdk.concurrent.AQS;
 
 import java.util.concurrent.TimeUnit;
 import java.util.Collection;
+import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 

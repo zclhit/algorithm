@@ -1,14 +1,13 @@
 package algorithm_practice.LeetCode.code000;
 
 import common.util.SysOut;
-import junit.framework.TestCase;
-import org.junit.Test;
-import sun.jvm.hotspot.utilities.BitMap;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import junit.framework.TestCase;
+import org.junit.Test;
+import sun.jvm.hotspot.utilities.BitMap;
 
 /*
 给出一个区间的集合，请合并所有重叠的区间。
@@ -47,7 +46,7 @@ public class M056_合并区间 extends TestCase {
 
         int[][] intervals5 = new int[][]{{1, 4}, {2, 3}};
         SysOut.printArray(merge(intervals5));
-        
+
         int[][] intervals6 = new int[][]{{2,3},{2,2},{3,3},{1,3},{5,7},{2,2},{4,6}};
         SysOut.printArray(merge(intervals6));
 
