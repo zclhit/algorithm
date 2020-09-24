@@ -179,6 +179,7 @@ public class a0_多线程同步 extends TestCase {
     }
 
     private void save(Order diff) {
+        System.out.println("diff saved");
     }
 
     private Order checkOrder(ProcessOrder pos, DeliveryOrder dos) {

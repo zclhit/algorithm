@@ -17,7 +17,7 @@ import java.lang.reflect.Proxy;
  * 5.通过代理对象调用目标方法
  *
  * @author nibnait
- * @version $Id: Main.java, v 0.1 2019-09-02 下午7:07 nibnait Exp $$
+ * @version $Id: TestThis.java, v 0.1 2019-09-02 下午7:07 nibnait Exp $$
  */
 public class Main extends TestCase {
 
