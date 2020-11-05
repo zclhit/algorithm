@@ -32,6 +32,7 @@ public class CyclicBarrierDemo {
         e.printStackTrace();
       }
 
+
       System.out.println("所有线程处理完毕，继续进行其他操作");
     }
   }
