@@ -1,5 +1,11 @@
 package algorithm_practice.LeetCode.code100;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 public class M127_单词接龙 {
 
   /*
@@ -40,4 +46,82 @@ wordList = ["hot","dot","dog","lot","log"]
 链接：https://leetcode-cn.com/problems/word-ladder
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
    */
+
+  public static void main(String[] args) {
+    String beginWord = "hit";
+    String endWord = "cog";
+    List<String> wordList = Arrays.asList("hot", "dot", "dog", "lot", "log", "cog");
+    System.out.println("5 should equals" + ladderLength(beginWord, endWord, wordList));
+  }
+
+  /*
+  思路1：
+  将beginWord放第一位，endWords放最后一位，然后可以转换的建立边，进行从第一位到最后一位的BFS，维护一个最短距离
+  狄杰斯特拉算法
+   */
+  public static int ladderLength(String beginWord, String endWord, List<String> wordList) {
+    if (!wordList.contains(endWord)) {
+      return 0;//if end words not in result
+    }
+
+    // adjacent list
+    List<List<Integer>> adjList = new ArrayList<>();
+    List<Integer> start = new ArrayList<>();
+    int endIndex = 0;
+    for (int i = 0; i < wordList.size(); i++) {
+      if (wordList.get(i).equals(endWord)) {
+        endIndex = i;
+      }
+      if (canReach(beginWord, wordList.get(i))) {
+        start.add(i);
+      }
+    }
+
+    for (int i = 0; i < wordList.size(); i++) {
+      List<Integer> edge = new ArrayList<>();
+      for (int j = 0; j < wordList.size(); j++) {
+        if (canReach(wordList.get(i), wordList.get(j))) {
+          edge.add(j);
+        }
+      }
+      adjList.add(edge);
+    }
+
+    //bfs
+    int[] minLength = new int[wordList.size()];
+    Queue<Integer> queue = new LinkedList<>();
+    for (Integer i : start) {
+      queue.offer(i);
+      minLength[i] = 2;
+      if (i == endIndex) {
+        return 2;
+      }
+    }
+    while (!queue.isEmpty()) {
+      int currentNode = queue.poll();
+      List<Integer> edges = adjList.get(currentNode);
+      for (Integer node : edges) {
+        if (node == endIndex) {
+          return minLength[currentNode] + 1;
+        } else {
+          if (minLength[node] == 0) {
+            minLength[node] = minLength[currentNode] + 1;
+            queue.offer(node);
+          }
+        }
+      }
+    }
+
+    return minLength[endIndex];
+  }
+
+  public static boolean canReach(String a, String b) {
+    int diff = 0;
+    for (int i = 0; i < a.length(); i++) {
+      if (a.charAt(i) != b.charAt(i)) {
+        diff++;
+      }
+    }
+    return diff == 1;
+  }
 }
