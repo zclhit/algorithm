@@ -3,6 +3,7 @@ package algorithm_practice.LeetCode.code000;
 import common.datastruct.ListNode;
 
 public class E002_两数相加 {
+
   /*
   给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
 
@@ -21,10 +22,46 @@ public class E002_两数相加 {
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
    */
   public static void main(String[] args) {
+    E002_两数相加 o = new E002_两数相加();
 
   }
 
   public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-    return l1;
+    int val = (l1.val + l2.val) % 10;
+    int adder = (l1.val + l2.val) / 10;
+    ListNode resNode = new ListNode(val);
+    l1 = l1.next;
+    l2 = l2.next;
+    ListNode currentNode = resNode;
+    while (l1 != null && l2 != null) {
+      val = (l1.val + l2.val + adder) % 10;
+      adder = (l1.val + l2.val + adder) / 10;
+      l1 = l1.next;
+      l2 = l2.next;
+      ListNode nextNode = new ListNode(val);
+      currentNode.next = nextNode;
+      currentNode = nextNode;
+    }
+    while (l1 != null) {
+      val = (l1.val + adder) % 10;
+      adder = (l1.val + adder) / 10;
+      l1 = l1.next;
+      ListNode nextNode = new ListNode(val);
+      currentNode.next = nextNode;
+      currentNode = nextNode;
+    }
+    while (l2 != null) {
+      val = (l2.val + adder) % 10;
+      adder = (l2.val + adder) / 10;
+      l2=l2.next;
+      ListNode nextNode = new ListNode(val);
+      currentNode.next = nextNode;
+      currentNode = nextNode;
+    }
+    if (adder != 0) {
+      ListNode nextNode = new ListNode(adder);
+      currentNode.next = nextNode;
+    }
+    return resNode;
   }
 }
